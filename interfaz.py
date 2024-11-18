@@ -14,9 +14,7 @@ def buscar_juego():
     lista_resultados.delete(0, tk.END)
 
     try:
-        # Obtener enlace de descarga general (SHOW ALL)
         enlace = buscarEnlace(url_base)
-        print(f"Buscando '{juego}' en: {enlace}")
         resultados = enlaceDescarga(enlace, juego)
         def obtener_resultados():
             messagebox.showinfo("Buscando", "Buscando el juego en los enlaces ... ")
@@ -38,7 +36,7 @@ def abrir_enlace(event):
         webbrowser.open(url)
 
 ventana = tk.Tk()
-ventana.title("Buscador de Juegos Retro")
+ventana.title("GalleRoBot")
 ventana.geometry("600x400")
 
 tk.Label(ventana, text="Título del Juego:").pack(pady=5)
