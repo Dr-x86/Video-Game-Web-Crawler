@@ -7,13 +7,13 @@ from urllib.parse import unquote
 URLS de referencia
 # Para ayudar a filtrar por consola
 https://archive.org/details/3DSCIA_testitem1    # 3DS
-https://archive.org/details/ps2-iso-backups-7z  # PS2
+https://archive.org/details/PS2CollectionPart2ByGhostware  # PS2
 https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it # GBA
 """
 
 
 urls = {
-    "Playstation 2":"https://archive.org/details/ps2-iso-backups-7z",
+    "Playstation 2":"https://archive.org/details/PS2CollectionPart2ByGhostware",
     "Game Boy Advance":"https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it",
     "Nintendo 3DS":"https://archive.org/details/3DSCIA_testitem1"}
 
