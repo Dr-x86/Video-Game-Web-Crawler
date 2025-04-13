@@ -2,23 +2,33 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urljoin
 from urllib.parse import unquote
+from tkinter import messagebox
 
 def busquedaRecursiva(lista_urls):
     lista_enlaces = [] 
     for url in lista_urls:
-        lista_enlaces.append(buscarEnlace(url))
+        enlace = buscarEnlace(url) 
+        if enlace == "": 
+            continue
+        lista_enlaces.append(enlace)
     return lista_enlaces
-    
+
 def buscarEnlace(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "lxml")
-    links = soup.find_all('a',string="SHOW ALL")
-    
-    for link in links:
-        href = link.get('href')
-        full_url = urljoin(url, href)
-        return full_url
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "lxml")
+        links = soup.find_all('a',string="SHOW ALL")
         
+        for link in links:
+            href = link.get('href')
+            full_url = urljoin(url, href)
+            return full_url
+            
+    except Exception as e:
+        print(f" 1.- No funciona el enlace {url}, error {e}. Saltando ... ")
+    
+    return ""
+    
 def enlaceDescarga(url, juego):
     lista = []
     response = requests.get(url)

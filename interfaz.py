@@ -5,7 +5,7 @@ import webbrowser
 import threading
 
 urls = {
-    "Playstation 2":["https://archive.org/details/PS2CollectionPart2ByGhostware","https://archive.org/details/ps2_bob_collection"],
+    "Playstation 2":["https://archive.org/details/ps2_bob_collection","https://archive.org/details/PS2CollectionPart1ByGhostware","https://archive.org/details/PS2CollectionPart2ByGhostware"],
     "Game Boy Advance":["https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it","https://archive.org/details/unrenamed-consoles-gba"],
     "Nintendo 3DS":["https://archive.org/details/3ds-cia-eshop","https://archive.org/details/wonderswan-cias-3ds"]
 }
@@ -34,14 +34,13 @@ def buscar_juego():
         return
     
     lista_resultados.delete(0, tk.END)
-    try:
-        lista_enlaces = busquedaRecursiva(urls[consola])
-        for enlace in lista_enlaces:
-            lista_resultado_juegos.append(enlaceDescarga(enlace, juego))
-        obtener_resultados(lista_resultado_juegos)
+    
+    lista_enlaces = busquedaRecursiva(urls[consola])
+    for enlace in lista_enlaces:
+        lista_resultado_juegos.append(enlaceDescarga(enlace, juego))
+    
+    obtener_resultados(lista_resultado_juegos)
 
-    except Exception as e:
-        messagebox.showerror("Error", f"Hubo un problema al buscar el juego: {str(e)}")
     
     entry_juego["state"]="normal"
     btn_buscar["state"]="normal"
