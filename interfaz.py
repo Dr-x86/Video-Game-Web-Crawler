@@ -1,34 +1,44 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from crawler import urls, buscarEnlace, enlaceDescarga
+from crawler import enlaceDescarga,busquedaRecursiva
 import webbrowser
 import threading
 
+urls = {
+    "Playstation 2":["https://archive.org/details/PS2CollectionPart2ByGhostware","https://archive.org/details/ps2_bob_collection"],
+    "Game Boy Advance":["https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it","https://archive.org/details/unrenamed-consoles-gba"],
+    "Nintendo 3DS":["https://archive.org/details/3ds-cia-eshop","https://archive.org/details/wonderswan-cias-3ds"]
+}
+
+def obtener_resultados(lista_resultado_juegos):
+    bandera = True
+    for resultado in lista_resultado_juegos:
+        for juego in resultado:
+            bandera = False
+            lista_resultados.insert(tk.END, juego)
+    if(bandera):
+        messagebox.showinfo("No disponible","Juego no disponible aún")
+        return
+
 def buscar_juego():
+    lista_resultado_juegos = []
+    
     entry_juego["state"]="disable"
     btn_buscar["state"]="disable"
     
     juego = entry_juego.get().strip()
     consola = combo_consola.get().strip()
-    
 
     if not juego or consola not in urls:
         messagebox.showerror("Error", "Debes ingresar el título del juego y seleccionar una consola.")
         return
-    url_base = urls[consola]
+    
     lista_resultados.delete(0, tk.END)
-
     try:
-        enlace = buscarEnlace(url_base)
-        resultados = enlaceDescarga(enlace, juego)
-        def obtener_resultados():
-            messagebox.showinfo("Buscando", "Buscando el juego en los enlaces ... ")
-            for resultado in resultados:
-                lista_resultados.insert(tk.END, resultado)
-
-        obtener_resultados()
-        if resultados == []:
-            messagebox.showerror("Error", "No se encontró.")
+        lista_enlaces = busquedaRecursiva(urls[consola])
+        for enlace in lista_enlaces:
+            lista_resultado_juegos.append(enlaceDescarga(enlace, juego))
+        obtener_resultados(lista_resultado_juegos)
 
     except Exception as e:
         messagebox.showerror("Error", f"Hubo un problema al buscar el juego: {str(e)}")
