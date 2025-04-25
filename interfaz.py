@@ -6,7 +6,7 @@ import threading
 
 urls = {
     "Playstation 2":["https://archive.org/details/ps2_bob_collection","https://archive.org/details/PS2CollectionPart1ByGhostware","https://archive.org/details/PS2CollectionPart2ByGhostware"],
-    "Game Boy Advance":["https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it","https://archive.org/details/unrenamed-consoles-gba"],
+    "GBA - GB":["https://archive.org/details/2-games-in-1-sonic-advance-sonic-battle-europe-en-ja-fr-de-es-en-ja-fr-de-es-it","https://archive.org/details/unrenamed-consoles-gba"],
     "Nintendo 3DS":["https://archive.org/details/3ds-cia-eshop","https://archive.org/details/wonderswan-cias-3ds"]
 }
 
@@ -60,7 +60,7 @@ def inicio():
     hilo.start()
 
 ventana = tk.Tk()
-ventana.title("Bot-Crawler")
+ventana.title("Bot - Roms")
 ventana.geometry("600x450")
 
 tk.Label(ventana, text="Título del Juego:").pack(pady=5)
